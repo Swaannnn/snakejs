@@ -5,14 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Snake Game</title>
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="assets/favicon.png">
     </head>
     <body>
         <div>
+            <div id="startgame-container">
+                <div class="startgame">
+                    <p class="startgame-title">Welcome to SnakeJS !</p>
+                    <img src="assets/snake.png" width="100" alt="snake logo"/>
+                    <br />
+                    <button class="start" onclick="startGame()">Start</button>
+                </div>
+            </div>
             <div id="gameover-container">
                 <div class="gameover">
                     <p class="gameover-title">Game Over</p>
                     <p id="gameover-score">Score: 42</p>
-                    <button class="restart" onclick="restartGame()">Restart</button>
+                    <button class="restart" onclick="startGame()">Restart</button>
                 </div>
             </div>
             <div>
