@@ -58,6 +58,8 @@ let applePosition = [];
 
 let score = 0;
 let scoreDiv = document.getElementById('score-score');
+let gameoverScoreDiv = document.getElementById('gameover-score');
+let gameOverDiv = document.getElementById('gameover-container');
 let isGameActive = true;
 let isGamePaused = false;
 
@@ -168,7 +170,6 @@ function snakeCollision() {
     }
 
     const snakePositionWithoutHead = snakePosition.slice(0, snakePosition.length - 1);
-
     if (snakePositionWithoutHead.some(item => posEquals(item, snakeHead))) {
         stopGame();
     }
@@ -177,8 +178,9 @@ function snakeCollision() {
 
 // arrête le jeu
 function stopGame() {
-    // TODO faire un truc propre qui affiche le score
     isGameActive = false;
+    gameoverScoreDiv.textContent = `Score: ${score}`;
+    gameOverDiv.style.display = 'flex';
 }
 
 
@@ -186,6 +188,34 @@ function stopGame() {
 function pauseGame() {
     // TODO faire en sorte de pouvoir reprendre le jeu
     isGamePaused = !isGamePaused;
+}
+
+
+// permet de relancer une partie
+function restartGame() {
+    x = 0;
+    y = 0;
+    x_dir = 1;
+    y_dir = 0;
+
+    snakeSize = 15;
+    snakePosition = [];
+    snakeHead = [];
+
+    addNewApple = true;
+    applePosition = [];
+
+    score = 0;
+    scoreDiv = document.getElementById('score-score');
+    gameoverScoreDiv = document.getElementById('gameover-score');
+    gameOverDiv = document.getElementById('gameover-container');
+    isGameActive = true;
+    isGamePaused = false;
+
+    gameOverDiv.style.display = 'none';
+    scoreDiv.textContent = '0';
+
+    gameLoop();
 }
 
 

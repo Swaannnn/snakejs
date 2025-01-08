@@ -18,6 +18,42 @@ body {
     flex-direction: row;
 }
 
+#gameover-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    width: 750px;
+    height: 500px;
+    position: absolute;
+
+    left: calc(50% - 375px);
+    top: calc(50% - 188px);
+    background-color: rgba(0.5, 0, 0, 0.5);
+}
+
+.gameover {
+    background-color: green;
+    color: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 375px;
+    height: 250px;
+    /*position: absolute;*/
+
+    /*left: calc(50% - 175px);*/
+    /*top: calc(50% - 63px);*/
+}
+
+.gameover-title {
+    font-size: 35px;
+}
+
+
 canvas {
     /*border: 2px solid white;*/
 }
