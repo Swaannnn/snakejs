@@ -14,11 +14,32 @@ canvas.width = canvasWidth;
 canvas.height = canvaHeight;
 
 // div utiles
-scoreDiv = document.getElementById('score-score');
-gameoverScoreDiv = document.getElementById('gameover-score');
-gameOverDiv = document.getElementById('gameover-container');
-startGameDiv = document.getElementById('startgame-container');
+let scoreText = document.getElementById('score-score');
+let highscore = localStorage.getItem('highscore')
+let highscoreText = document.getElementById('highscore-score');
+highscoreText.textContent = highscore;
+let gameoverScoreDiv = document.getElementById('gameover-score');
+let gameOverDiv = document.getElementById('gameover-container');
+let startGameDiv = document.getElementById('startgame-container');
+let pauseGameDiv = document.getElementById('pausegame-container');
+let leaderboardDiv = document.getElementById('leaderboard-container');
+let popupHighScoreDiv = document.getElementById('popup-highscore-container');
+let closePopupHighscore = document.getElementById('close-popup-highscore');
+let closeLeaderboard = document.getElementById('close-leaderboard');
+closePopupHighscore.addEventListener('click', () => {
+    popupHighScoreDiv.style.display = 'none';
+})
+closeLeaderboard.addEventListener('click', () => {
+    leaderboardDiv.style.display = 'none';
+})
 
+let nameHighscore = document.getElementById('name-highscore');
+
+async function addUser() {
+    // console.log(nameHighscore.value)
+    await addHighScore(nameHighscore.value, score)
+    popupHighScoreDiv.style.display = 'none';
+}
 
 // Configuration du Snake
 let x = 0;
@@ -41,6 +62,7 @@ let isGamePaused = false;
 document.addEventListener('keydown', (event) => {
     const keyName = event.key;
 
+    // TODO: empecher un "demi tour" si 2 touches pressées trop vite
     if (keyName === 'ArrowUp' && !(y_dir > 0)) {
         x_dir = 0;
         y_dir = -1;
@@ -146,7 +168,7 @@ function eatApple() {
     if ((applePosition[0] === snakeHead[0]) && (applePosition[1] === snakeHead[1])) {
         snakeSize += 3;
         score += 1;
-        scoreDiv.textContent = score;
+        scoreText.textContent = score;
         addApple();
     }
 }
@@ -154,7 +176,6 @@ function eatApple() {
 
 // gère la collision du snake sur lui même pour perdre
 function snakeCollision() {
-    // TODO continuer bien les collisions
     function posEquals(pos1, pos2) {
         if (pos1.length !== pos2.length) {
             return false;
@@ -177,15 +198,30 @@ function snakeCollision() {
 // arrête le jeu
 function stopGame() {
     isGameActive = false;
-    gameoverScoreDiv.textContent = `Score: ${score}`;
+    if (score > highscore) {
+        localStorage.setItem('highscore', score);
+        highscoreText.textContent = score;
+        gameoverScoreDiv.textContent = `New high score : ${score} !`;
+        popupHighScoreDiv.style.display = 'flex';
+    } else {
+        gameoverScoreDiv.textContent = `Score : ${score}`;
+    }
     gameOverDiv.style.display = 'flex';
 }
 
 
 // met en pause le jeu
 function pauseGame() {
-    // TODO faire en sorte de pouvoir reprendre le jeu
-    isGamePaused = !isGamePaused;
+    if (isGameActive) {
+        if (isGamePaused) {
+            isGamePaused = false;
+            pauseGameDiv.style.display = 'none';
+            gameLoop();
+        } else {
+            isGamePaused = true;
+            pauseGameDiv.style.display = 'flex';
+        }
+    }
 }
 
 
@@ -208,7 +244,8 @@ function startGame() {
 
     gameOverDiv.style.display = 'none';
     startGameDiv.style.display = 'none';
-    scoreDiv.textContent = '0';
+    pauseGameDiv.style.display = 'none';
+    scoreText.textContent = '0';
 
     addApple();
     gameLoop();
@@ -231,4 +268,27 @@ function gameLoop() {
     }
 }
 
-gameLoop();
+
+// affiche le leaderboard global
+async function showLeaderboard() {
+    const scores = await getHighScores();
+
+    leaderboardDiv.style.display = 'flex';
+
+    const tableBody = document.querySelector("#leaderboard-scores tbody");
+    tableBody.innerHTML = '';
+
+    scores.forEach(score => {
+        const row = document.createElement("tr");
+
+        const nameCell = document.createElement("td");
+        nameCell.textContent = score.name;
+        row.appendChild(nameCell);
+
+        const scoreCell = document.createElement("td");
+        scoreCell.textContent = score.score;
+        row.appendChild(scoreCell);
+
+        tableBody.appendChild(row);
+    });
+}

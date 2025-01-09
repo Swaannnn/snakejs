@@ -1,0 +1,146 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    background-color: #000;
+    color: white;
+
+    font-family: 'Roboto', sans-serif;
+}
+
+.title {
+    text-align: center;
+}
+
+.score-div {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 30px;
+}
+
+.score, .highscore {
+    display: flex;
+    flex-direction: row;
+}
+
+.score-value, #score-score, .highscore-value, #highscore-score, .leaderboard-text {
+    margin: 0;
+}
+
+#startgame-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 750px;
+    height: 500px;
+    position: absolute;
+
+    left: calc(50% - 375px);
+    top: calc(50% - 180px);
+    background-color: rgba(0.5, 0, 0, 0.5);
+}
+
+.startgame {
+    background-color: green;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 425px;
+    height: 275px;
+}
+
+.startgame-title, .pausegame-title, .gameover-title {
+    font-size: 30px;
+    margin: 0;
+}
+
+#pausegame-container, #gameover-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    width: 750px;
+    height: 500px;
+    position: absolute;
+
+    left: calc(50% - 375px);
+    top: calc(50% - 180px);
+    background-color: rgba(0.5, 0, 0, 0.5);
+}
+
+#leaderboard-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    width: 750px;
+    height: 500px;
+    position: absolute;
+}
+
+#close-leaderboard {
+    position: absolute;
+    top: 110px;
+    right: 162px;
+
+    cursor: pointer;
+}
+
+.pausegame, .gameover, .leaderboard {
+    background-color: green;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 425px;
+    height: 275px;
+}
+
+canvas {
+    /*border: 2px solid white;*/
+}
+
+#popup-highscore-container {
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    width: 750px;
+    height: 500px;
+    position: absolute;
+
+    left: calc(50% - 375px);
+    top: calc(50% - 180px);
+}
+
+.popup-highscore {
+    background-color: green;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 425px;
+    height: 275px;
+}
+
+#close-popup-highscore {
+    position: absolute;
+    top: 110px;
+    right: 162px;
+
+    cursor: pointer;
+}

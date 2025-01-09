@@ -4,35 +4,80 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Snake Game</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="icon" type="image/png" href="assets/favicon.png">
     </head>
     <body>
         <div>
+            <div>
+                <h1 class="title">SnakeJS Game</h1>
+                <div class="score-div">
+                    <div>
+                        <div class="score">
+                            <p class="score-value">Score :&nbsp;</p>
+                            <p id="score-score">0</p>
+                        </div>
+                        <div class="highscore">
+                            <p class="highscore-value">High score :&nbsp;</p>
+                            <p id="highscore-score">0</p>
+                        </div>
+                    </div>
+                    <a class="leaderboard-button" onclick="showLeaderboard()">leaderboard</a>
+                </div>
+            </div>
             <div id="startgame-container">
                 <div class="startgame">
                     <p class="startgame-title">Welcome to SnakeJS !</p>
-                    <img src="assets/snake.png" width="100" alt="snake logo"/>
+                    <img src="assets/snake.png" width="140" alt="snake logo"/>
                     <br />
                     <button class="start" onclick="startGame()">Start</button>
+                </div>
+            </div>
+            <div id="pausegame-container">
+                <div class="pausegame">
+                    <p class="pausegame-title">Game paused</p>
+                    <img src="assets/snake.png" width="140" alt="snake logo"/>
+                    <button class="continue" onclick="pauseGame()">Unpause</button>
                 </div>
             </div>
             <div id="gameover-container">
                 <div class="gameover">
                     <p class="gameover-title">Game Over</p>
-                    <p id="gameover-score">Score: 42</p>
+                    <img src="assets/snake.png" width="140" alt="snake logo"/>
+                    <p id="gameover-score"></p>
                     <button class="restart" onclick="startGame()">Restart</button>
                 </div>
             </div>
-            <div>
-                <h1 class="title">SnakeJS Game</h1>
-                <div class="score">
-                    <p class="score-title">Score :&nbsp;</p>
-                    <p id="score-score">0</p>
+            <div id="leaderboard-container">
+                <div class="leaderboard">
+                    <img src="assets/cross.svg" alt="cross icon" id="close-leaderboard">
+                    <p class="leaderboard-text">Leader board</p>
+                    <table id="leaderboard-scores">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="popup-highscore-container">
+                <img src="assets/cross.svg" alt="cross icon" id="close-popup-highscore">
+                <div class="popup-highscore">
+                    <p>New high score !</p>
+                    <label>
+                        Enter your name : <br>
+                        <input type="text" id="name-highscore" placeholder="Enter your name here">
+                    </label>
+                    <button class="add-highscore" onclick="addUser()">Submit</button>
                 </div>
             </div>
             <canvas id="gameCanvas"></canvas>
         </div>
-        <script src="index.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/db.js"></script>
     </body>
 </html>
