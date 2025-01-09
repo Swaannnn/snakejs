@@ -28,6 +28,7 @@ let closePopupHighscore = document.getElementById('close-popup-highscore');
 let closeLeaderboard = document.getElementById('close-leaderboard');
 closePopupHighscore.addEventListener('click', () => {
     popupHighScoreDiv.style.display = 'none';
+    isHighScore = false;
 })
 closeLeaderboard.addEventListener('click', () => {
     leaderboardDiv.style.display = 'none';
@@ -39,6 +40,7 @@ async function addUser() {
     // console.log(nameHighscore.value)
     await addHighScore(nameHighscore.value, score)
     popupHighScoreDiv.style.display = 'none';
+    isHighScore = false;
 }
 
 // Configuration du Snake
@@ -56,6 +58,7 @@ let applePosition = [];
 let score = 0;
 let isGameActive = false;
 let isGamePaused = false;
+let isHighScore = false;
 
 
 // Configuration des touches pressables
@@ -81,7 +84,23 @@ document.addEventListener('keydown', (event) => {
     }
 
     if (keyName === 'Enter') {
-        pauseGame();
+        if (isGameActive) {
+            pauseGame();
+        } else if (isHighScore) {
+            console.log("dans le high score form")
+        } else {
+            startGame();
+        }
+    }
+
+    if (event.key === 'Escape') {
+        if (popupHighScoreDiv.style.display === 'flex') {
+            popupHighScoreDiv.style.display = 'none';
+            isHighScore = false;
+        }
+        if (leaderboardDiv.style.display === 'flex') {
+            leaderboardDiv.style.display = 'none';
+        }
     }
 });
 
@@ -199,6 +218,7 @@ function snakeCollision() {
 function stopGame() {
     isGameActive = false;
     if (score > highscore) {
+        isHighScore = true;
         localStorage.setItem('highscore', score);
         highscoreText.textContent = score;
         gameoverScoreDiv.textContent = `New high score : ${score} !`;
@@ -272,14 +292,19 @@ function gameLoop() {
 // affiche le leaderboard global
 async function showLeaderboard() {
     const scores = await getHighScores();
+    // TODO ajouter spinner pendant le chargement
 
     leaderboardDiv.style.display = 'flex';
 
     const tableBody = document.querySelector("#leaderboard-scores tbody");
     tableBody.innerHTML = '';
 
-    scores.forEach(score => {
+    scores.slice(0, 5).forEach((score, i) => {
         const row = document.createElement("tr");
+
+        const numberCell = document.createElement("td");
+        numberCell.textContent = `${i+1}. `;
+        row.appendChild(numberCell);
 
         const nameCell = document.createElement("td");
         nameCell.textContent = score.name;

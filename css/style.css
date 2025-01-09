@@ -29,7 +29,7 @@ body {
     flex-direction: row;
 }
 
-.score-value, #score-score, .highscore-value, #highscore-score, .leaderboard-text {
+.score-value, #score-score, .highscore-value, #highscore-score {
     margin: 0;
 }
 
@@ -43,7 +43,7 @@ body {
     position: absolute;
 
     left: calc(50% - 375px);
-    top: calc(50% - 180px);
+    top: calc(50% - 205px);
     background-color: rgba(0.5, 0, 0, 0.5);
 }
 
@@ -64,7 +64,7 @@ body {
     margin: 0;
 }
 
-#pausegame-container, #gameover-container {
+#pausegame-container, #gameover-container, #popup-highscore-container {
     display: none;
     justify-content: center;
     align-items: center;
@@ -74,8 +74,12 @@ body {
     position: absolute;
 
     left: calc(50% - 375px);
-    top: calc(50% - 180px);
+    top: calc(50% - 205px);
     background-color: rgba(0.5, 0, 0, 0.5);
+}
+
+.leaderboard-text {
+    font-size: 20px;
 }
 
 #leaderboard-container {
@@ -112,19 +116,6 @@ canvas {
     /*border: 2px solid white;*/
 }
 
-#popup-highscore-container {
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    width: 750px;
-    height: 500px;
-    position: absolute;
-
-    left: calc(50% - 375px);
-    top: calc(50% - 180px);
-}
-
 .popup-highscore {
     background-color: green;
 
@@ -143,4 +134,21 @@ canvas {
     right: 162px;
 
     cursor: pointer;
+}
+
+.button {
+    cursor: pointer;
+}
+
+.button:hover {
+    /*background-color: #0044f4;*/
+
+}
+
+.button:active {
+    /*background-color: blue;*/
+}
+
+.gameinfos {
+    text-align: center;
 }

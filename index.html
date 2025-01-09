@@ -22,7 +22,9 @@
                             <p id="highscore-score">0</p>
                         </div>
                     </div>
-                    <a class="leaderboard-button" onclick="showLeaderboard()">leaderboard</a>
+                    <div>
+                        <a class="leaderboard-button button" onclick="showLeaderboard()">leaderboard</a>
+                    </div>
                 </div>
             </div>
             <div id="startgame-container">
@@ -30,7 +32,7 @@
                     <p class="startgame-title">Welcome to SnakeJS !</p>
                     <img src="assets/snake.png" width="140" alt="snake logo"/>
                     <br />
-                    <button class="start" onclick="startGame()">Start</button>
+                    <a class="start button" onclick="startGame()">Start</a>
                 </div>
             </div>
             <div id="pausegame-container">
@@ -45,22 +47,22 @@
                     <p class="gameover-title">Game Over</p>
                     <img src="assets/snake.png" width="140" alt="snake logo"/>
                     <p id="gameover-score"></p>
-                    <button class="restart" onclick="startGame()">Restart</button>
+                    <a class="restart" onclick="startGame()">Restart</a>
                 </div>
             </div>
             <div id="leaderboard-container">
                 <div class="leaderboard">
                     <img src="assets/cross.svg" alt="cross icon" id="close-leaderboard">
-                    <p class="leaderboard-text">Leader board</p>
+                    <p class="leaderboard-text">Leaderboard</p>
                     <table id="leaderboard-scores">
                         <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Score</th>
-                        </tr>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Score</th>
+                            </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -76,6 +78,9 @@
                 </div>
             </div>
             <canvas id="gameCanvas"></canvas>
+            <div class="gameinfos">
+                <p><i>Press 'Enter' to pause the game.</i></p>
+            </div>
         </div>
         <script src="js/index.js"></script>
         <script src="js/db.js"></script>
