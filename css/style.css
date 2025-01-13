@@ -138,6 +138,22 @@ canvas {
 
 .button {
     cursor: pointer;
+    position: relative;
+}
+
+.button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: width 0.4s ease;
+}
+
+.button:hover::after {
+    width: 100%;
 }
 
 .button:hover {
